@@ -19,27 +19,27 @@ class CreateOrAlterTableMethodIsCalled implements ExtractionStrategy
     /** @return Option<string> */
     public function extract(): Option
     {
-        if (!$this->visitor->nodeIsInScope($this->node)) {
+        if (! $this->visitor->nodeIsInScope($this->node)) {
             return \none();
         }
 
-        if (!$this->isAStandardMethodCall() && !$this->isAStaticMethodCall()) {
+        if (! $this->isAStandardMethodCall() && ! $this->isAStaticMethodCall()) {
             return \none();
         }
 
-        if (!$this->hasArgCount(2)) {
+        if (! $this->hasArgCount(2)) {
             return \none();
         }
 
-        if (!$this->isCallingMethod('create', 'table')) {
+        if (! $this->isCallingMethod('create', 'table')) {
             return \none();
         }
 
-        if (!$this->nthArgumentIsA(0, Node\Scalar\String_::class)) {
+        if (! $this->nthArgumentIsA(0, Node\Scalar\String_::class)) {
             return \none();
         }
 
-        if (!$this->nthArgumentIsA(1, Node\Expr\Closure::class)) {
+        if (! $this->nthArgumentIsA(1, Node\Expr\Closure::class)) {
             return \none();
         }
 

@@ -19,7 +19,7 @@ class ExtractMigrationTableVisitor extends NodeVisitorAbstract implements TableN
 {
     private array $parserStrategies;
 
-    /** @var string[] $tablesFound  */
+    /** @var string[] */
     private array $tablesFound = [];
 
     private Traversable $strategyIterator;
@@ -50,10 +50,11 @@ class ExtractMigrationTableVisitor extends NodeVisitorAbstract implements TableN
     {
         if ($node instanceof Node\Stmt\ClassMethod && in_array($node->name->name, ['up', 'down'])) {
             $this->upOrDownMethod = $node;
+
             return false;
         }
 
-        if (!isset($this->upOrDownMethod)) {
+        if (! isset($this->upOrDownMethod)) {
             return false;
         }
 
@@ -80,16 +81,16 @@ class ExtractMigrationTableVisitor extends NodeVisitorAbstract implements TableN
     /** @return Option<Node\Stmt\Expression> */
     public function findCallSite(callable $callback): Option
     {
-        if (!isset($this->upOrDownMethod)) {
+        if (! isset($this->upOrDownMethod)) {
             return \none();
         }
 
         foreach ($this->upOrDownMethod()->stmts as $stmt) {
-            if (!$stmt instanceof Node\Stmt\Expression) {
+            if (! $stmt instanceof Node\Stmt\Expression) {
                 continue;
             }
 
-            if (!$callback($stmt)) {
+            if (! $callback($stmt)) {
                 continue;
             }
 

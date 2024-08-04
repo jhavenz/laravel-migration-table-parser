@@ -24,7 +24,7 @@ class LaravelMigrationTableParserServiceProvider extends PackageServiceProvider
         $this->app->singleton(Parser::class, function (Application $app) {
             return new Parser(
                 (new ParserFactory)->createForHostVersion(),
-                new NodeTraverser(),
+                new NodeTraverser,
                 $app['events']
             );
         });

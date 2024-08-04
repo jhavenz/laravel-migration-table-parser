@@ -27,14 +27,14 @@ trait TraverseMigrationPredicates
     {
         $args = $this->node->args ?? null;
 
-        return !is_null($args) && count($args) === $count;
+        return ! is_null($args) && count($args) === $count;
     }
 
     protected function nthArgumentIsA(int $argIndex, string $type): bool
     {
         $args = $this->node->args ?? [];
 
-        if (!array_key_exists($argIndex, $args)) {
+        if (! array_key_exists($argIndex, $args)) {
             return false;
         }
 
@@ -45,11 +45,12 @@ trait TraverseMigrationPredicates
     {
         if ($node instanceof Node\Stmt\ClassMethod && in_array($node->name->name, ['up', 'down'])) {
             $this->upOrDownNode = $node;
+
             /** We're just entering it... */
             return false;
         }
 
-        if (!isset($this->upOrDownNode)) {
+        if (! isset($this->upOrDownNode)) {
             return false;
         }
 

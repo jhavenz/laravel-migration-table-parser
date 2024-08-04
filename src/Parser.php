@@ -29,7 +29,7 @@ class Parser
             $carry->push($this->parse($path));
 
             return $carry;
-        }, new Collection());
+        }, new Collection);
     }
 
     public function parse(Stringable|string $filePath): ParserResult
@@ -49,7 +49,7 @@ class Parser
 
         if (false === $path = realpath((string) $filePath)) {
             $this->dispatcher->dispatch(new ParsingCompleted(
-                $result = new ParserResult(false, "Invalid path given", (string) $filePath),
+                $result = new ParserResult(false, 'Invalid path given', (string) $filePath),
                 $this
             ));
 
@@ -60,7 +60,7 @@ class Parser
 
         foreach ($visitors as $visitor) {
             assert(is_a($visitor, TableNameVisitor::class, true),
-                "Visitor must implement the `TableNameVisitor` contract: ".class_basename($visitor)
+                'Visitor must implement the `TableNameVisitor` contract: '.class_basename($visitor)
             );
         }
 
@@ -69,7 +69,7 @@ class Parser
             $ast = $this->parser->parse(file_get_contents($path));
         } catch (\Throwable $e) {
             $this->dispatcher->dispatch(new ParsingCompleted(
-                $result = new ParserResult(false, "Parse error", $path, exception: $e),
+                $result = new ParserResult(false, 'Parse error', $path, exception: $e),
                 $this
             ));
 
@@ -105,7 +105,7 @@ class Parser
             }
 
             if (empty($tablesFound)) {
-                $parserResult = new ParserResult(false, "No tables found in migration at path", $path);
+                $parserResult = new ParserResult(false, 'No tables found in migration at path', $path);
             } else {
                 $parserResult = new ParserResult(true, 'success', $path, $tablesFound);
             }

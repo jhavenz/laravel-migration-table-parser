@@ -33,7 +33,7 @@ it('extracts tables for migrations that declare multiple tables', function () {
                 $basename = str($file)->basename('.php');
 
                 expect($tables)->toHaveCount($expectedCount->toInteger(), sprintf(
-                    "Failed asserting %s tables were found when parsing [%s]. Found: %s",
+                    'Failed asserting %s tables were found when parsing [%s]. Found: %s',
                     $expectedCount,
                     $basename,
                     $tables->join(', ')
@@ -51,7 +51,7 @@ it('throws an error for invalid migrations', function () {
             ->tables()
             ->tap(function ($tables) use ($basename) {
                 expect($tables)->toBeEmpty(sprintf(
-                    "The parser should have failed for the [%s] migration file, got [%s]",
+                    'The parser should have failed for the [%s] migration file, got [%s]',
                     $basename,
                     $tables->join(',')
                 ));

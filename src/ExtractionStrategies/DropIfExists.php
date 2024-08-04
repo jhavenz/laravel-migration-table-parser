@@ -18,19 +18,19 @@ class DropIfExists implements ExtractionStrategy
 
     public function extract(): Option
     {
-        if (!$this->visitor->nodeIsInScope($this->node)) {
+        if (! $this->visitor->nodeIsInScope($this->node)) {
             return \none();
         }
 
-        if (!$this->isAStandardMethodCall() && !$this->isAStaticMethodCall()) {
+        if (! $this->isAStandardMethodCall() && ! $this->isAStaticMethodCall()) {
             return \none();
         }
 
-        if (!$this->isCallingMethod('dropIfExists')) {
+        if (! $this->isCallingMethod('dropIfExists')) {
             return \none();
         }
 
-        if (!$this->nthArgumentIsA(0, Node\Scalar\String_::class)) {
+        if (! $this->nthArgumentIsA(0, Node\Scalar\String_::class)) {
             return \none();
         }
 

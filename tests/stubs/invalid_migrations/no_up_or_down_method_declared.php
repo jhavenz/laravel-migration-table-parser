@@ -6,7 +6,7 @@ return new class extends Migration
 {
     public function foo(): void
     {
-        DB::connection('foo')->statement(<<<SQL
+        DB::connection('foo')->statement(<<<'SQL'
         CREATE VIEW users as SELECT * FROM users
         SQL);
     }

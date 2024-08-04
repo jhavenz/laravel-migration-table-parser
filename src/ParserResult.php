@@ -59,7 +59,7 @@ readonly class ParserResult
     {
         $index = array_search($name, array_unique($this->tablesFound));
 
-        return false === $index
+        return $index === false
             ? \none()
             : \some($this->tablesFound[$index]);
     }
